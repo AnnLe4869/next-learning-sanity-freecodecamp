@@ -98,6 +98,16 @@ const recipeSchema = {
         },
       ],
     },
+    {
+      name: "instruction",
+      title: "Instruction",
+      type: "array",
+      of: [
+        {
+          type: "block",
+        },
+      ],
+    },
   ],
 };
 
