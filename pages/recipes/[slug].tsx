@@ -36,6 +36,8 @@ export default function SpecificRecipe({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [likes, setLikes] = useState(data?.recipe?.likes);
 
+  const router = useRouter();
+
   const {
     data: { recipe },
   } = usePreviewSubscription(recipeQuery, {
@@ -44,7 +46,9 @@ export default function SpecificRecipe({
     enabled: preview,
   });
 
-  const router = useRouter();
+  if (router.isFallback) {
+    return <h1>The recipe you found does not exist</h1>;
+  }
 
   const addLikes = async () => {
     try {
@@ -60,10 +64,6 @@ export default function SpecificRecipe({
       console.error(err);
     }
   };
-
-  if (router.isFallback) {
-    return <h1>The recipe you found does not exist</h1>;
-  }
 
   return (
     <article className="recipe">
