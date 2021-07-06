@@ -6,6 +6,7 @@
     "./node_modules/@sanity/base/types/**/*.ts",
     "./**/*.ts",
     "./**/*.tsx",
-    "schemas/chef.ts"
+    "schemas/chef.ts",
+    "schemas/recipe.js"
   ]
 }
