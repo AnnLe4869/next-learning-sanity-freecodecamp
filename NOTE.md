@@ -41,3 +41,11 @@
    This token can be founded in manage.sanity.io --> Settings --> Token
 4. Change to .env file only be reflected if we stop the development server and run it again
    (i.e re-run `npm run dev`)
+
+## Deploy
+
+1. Deploy Sanity
+   Go to the Sanity folder (in out case it's `/lib`) and run `sanity deploy`
+2. Deploy Next
+   We push the app to GitHub and follow instruction on how to deploy it to Vercel
+3.

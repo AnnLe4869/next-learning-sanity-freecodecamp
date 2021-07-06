@@ -32,12 +32,19 @@ const recipeQuery = `
 
 export default function SpecificRecipe({
   data,
+  preview,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [likes, setLikes] = useState(data?.recipe?.likes);
 
-  const router = useRouter();
+  const {
+    data: { recipe },
+  } = usePreviewSubscription(recipeQuery, {
+    params: { slug: data.recipe?.slug.current },
+    initialData: data,
+    enabled: preview,
+  });
 
-  const { recipe } = data;
+  const router = useRouter();
 
   const addLikes = async () => {
     try {
@@ -100,7 +107,7 @@ export default function SpecificRecipe({
 }
 
 export const getStaticProps: GetStaticProps<
-  { data: { recipe: RecipeDetail } },
+  { data: { recipe: RecipeDetail }; preview: boolean },
   { slug: string }
 > = async (context) => {
   if (!context.params)
@@ -111,7 +118,7 @@ export const getStaticProps: GetStaticProps<
   });
 
   return {
-    props: { data: { recipe } },
+    props: { data: { recipe }, preview: true },
   };
 };
 
