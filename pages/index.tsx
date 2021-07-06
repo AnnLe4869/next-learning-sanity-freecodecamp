@@ -5,7 +5,8 @@ import { Recipe } from "../types";
 import { sanityClient, urlFor } from "../lib/sanity";
 import Link from "next/link";
 
-const recipeQuery = `
+// Fetch all recipes
+const recipesQuery = `
   *[_type == 'recipe']{
     _id,
     name,
@@ -31,7 +32,7 @@ export default function Home({
         {recipes.length > 0 &&
           recipes.map((recipe) => (
             <li key={recipe._id} className="recipe-card">
-              <Link href={`/`}>
+              <Link href={`/recipes/${recipe.slug.current}`}>
                 <a>
                   <div
                     style={{
@@ -65,7 +66,7 @@ export default function Home({
 export const getStaticProps: GetStaticProps<{ recipes: Recipe[] }> =
   async () => {
     // Fetch data from Sanity studio
-    const recipes: Recipe[] = await sanityClient.fetch(recipeQuery);
+    const recipes: Recipe[] = await sanityClient.fetch(recipesQuery);
 
     return {
       props: {

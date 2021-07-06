@@ -27,4 +27,5 @@
    For playground, visit groq.dev
 2. The function `urlFor` we created in `sanity.ts` help generate the whole URL from the \_ref without having to actual fetching the full data.
    We then convert it to string using `.url()`
-3.
+3. The Component PortableText is used to parse the text from a text block into our React page without too much work
+   For example, without it we need some if else and styling
