@@ -37,18 +37,11 @@ export default function SpecificRecipe({
   const [likes, setLikes] = useState(data?.recipe?.likes);
 
   const router = useRouter();
-
-  const {
-    data: { recipe },
-  } = usePreviewSubscription(recipeQuery, {
-    params: { slug: data.recipe?.slug.current },
-    initialData: data,
-    enabled: preview,
-  });
-
   if (router.isFallback) {
     return <h1>The recipe you found does not exist</h1>;
   }
+
+  const { recipe } = data;
 
   const addLikes = async () => {
     try {
