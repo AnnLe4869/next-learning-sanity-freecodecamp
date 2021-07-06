@@ -1,31 +1,75 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { Recipe } from "../types";
+import { sanityClient, urlFor } from "../lib/sanity";
+import Link from "next/link";
+
+const recipeQuery = `
+  *[_type == 'recipe']{
+    _id,
+    name,
+    slug,
+    mainImage
+  }
+`;
 
 export default function Home({
-  data,
+  recipes,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { recipes } = data;
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Intro to NextJS</title>
+        <title>John&apos;s kitchen</title>
         <meta name="description" content="Some recipe" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <h1>Welcome to John&apos;s kitchen</h1>
+
+      <ul className="recipes-list">
+        {recipes.length > 0 &&
+          recipes.map((recipe) => (
+            <li key={recipe._id} className="recipe-card">
+              <Link href={`/`}>
+                <a>
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "60vh",
+                      minHeight: "500px",
+                    }}
+                  >
+                    <Image
+                      src={
+                        urlFor(recipe.mainImage.asset._ref).url() ||
+                        "placeholder image"
+                      }
+                      alt={recipe.name}
+                      layout="fill"
+                      objectFit="cover"
+                      objectPosition="left"
+                    />
+                  </div>
+
+                  <span>{recipe.name}</span>
+                </a>
+              </Link>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
 
-export const getStaticProps: GetStaticProps<{ data: { recipes: Recipe[] } }> =
+export const getStaticProps: GetStaticProps<{ recipes: Recipe[] }> =
   async () => {
+    // Fetch data from Sanity studio
+    const recipes: Recipe[] = await sanityClient.fetch(recipeQuery);
+
     return {
       props: {
-        data: {
-          recipes: [{ title: "Pineapple Smoothies", id: "hello" }],
-        },
+        recipes,
       },
     };
   };

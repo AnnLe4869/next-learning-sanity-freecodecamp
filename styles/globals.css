@@ -25,3 +25,70 @@ main {
   padding-top: 10px;
   text-decoration: none;
 }
+
+.recipes-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+}
+
+.recipe-card a {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: #444;
+  font-size: 22px;
+}
+
+.recipe h1 {
+  font-size: 48px;
+  font-weight: bolder;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.recipe img {
+  border: 0.5px solid #444;
+}
+
+.breakdown {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 10px;
+  border: 0.5px solid #444;
+}
+
+.ingredients {
+  list-style: none;
+  padding: 25px 10px;
+  border-right: 0.5px solid #444;
+}
+
+.ingredient {
+  margin-bottom: 15px;
+}
+
+.instructions {
+  padding: 15px;
+}
+
+.like-button {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  outline: none;
+  background: none;
+  border-radius: 5px;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}

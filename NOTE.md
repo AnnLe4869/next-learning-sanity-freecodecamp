@@ -17,3 +17,14 @@
 3. Setting up CORS - CORS control which domain can do request to our sanity content lake
    One way is running `sanity cors add https://domain_you_want_to_cors`
    Another is go to manage.sanity.io, go to Settings, then API settings, then CORS origins
+
+## Fetching data
+
+1. GROQ query language.
+   Just like SQL, this is how we pull data from our Sanity studio
+   For cheat sheet, go to https://www.sanity.io/docs/query-cheat-sheet
+   For testing out with out current studio, select Vision mode on localhost:3333 and choose correct API version  
+   For playground, visit groq.dev
+2. The function `urlFor` we created in `sanity.ts` help generate the whole URL from the \_ref without having to actual fetching the full data.
+   We then convert it to string using `.url()`
+3.
