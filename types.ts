@@ -38,4 +38,5 @@ export type RecipeDetail = {
     };
   }[];
   instruction: string;
+  likes: number;
 };

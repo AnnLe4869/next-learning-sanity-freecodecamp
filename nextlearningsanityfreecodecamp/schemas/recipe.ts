@@ -108,7 +108,15 @@ const recipeSchema = {
         },
       ],
     },
+    {
+      name: "likes",
+      title: "Likes",
+      type: "number",
+    },
   ],
+  initialValue: {
+    likes: 0,
+  },
 };
 
 export default recipeSchema;

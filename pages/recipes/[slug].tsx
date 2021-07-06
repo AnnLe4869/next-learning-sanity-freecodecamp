@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import {
   sanityClient,
   urlFor,
@@ -25,15 +25,34 @@ const recipeQuery = `
                 name
             }
         },
-        instruction
+        instruction,
+        likes
     }
 `;
 
 export default function SpecificRecipe({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [likes, setLikes] = useState(data?.recipe?.likes);
+
   const router = useRouter();
+
   const { recipe } = data;
+
+  const addLikes = async () => {
+    try {
+      const res = await fetch("/api/handle-like", {
+        method: "POST",
+        body: JSON.stringify({ _id: recipe._id }),
+      });
+
+      const data = await res.json();
+
+      setLikes(data.likes);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   if (router.isFallback) {
     return <h1>The recipe you found does not exist</h1>;
@@ -42,6 +61,10 @@ export default function SpecificRecipe({
   return (
     <article className="recipe">
       <h1>{recipe.name}</h1>
+
+      <button onClick={addLikes} className="like-button">
+        {likes} Likes
+      </button>
 
       <main className="content">
         {/* <Image /> */}
