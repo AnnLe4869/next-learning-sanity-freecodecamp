@@ -47,4 +47,4 @@
 1. Deploy Sanity
    Go to the Sanity folder (in out case it's `/lib`) and run `sanity deploy`
 2. Deploy Next
-   We push the app to GitHub and follow instruction on how to deploy it to Vercel
+   We push the app to GitHub and follow instruction on to deploy to Vercel
