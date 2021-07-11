@@ -48,3 +48,4 @@
    Go to the Sanity folder (in out case it's `/lib`) and run `sanity deploy`
 2. Deploy Next
    We push the app to GitHub and follow instruction on to deploy to Vercel
+3. What Vercel does it basically download the package and run `npm run build` and `npm run start` on its own server
